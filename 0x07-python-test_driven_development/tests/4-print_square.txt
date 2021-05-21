@@ -54,19 +54,26 @@ ________________________________________________________________________________
 Invalid square size
 >>> print_square('a')
 Traceback (most recent call last):
-    File "<stdin>", line 1, in ?
+    ...
 TypeError: size must be an integer
 
 __________________________________________________________________________________
 Invalid square size
 >>> print_square(-2)
 Traceback (most recent call last):
-    File "<stdin>", line 1, in ?
+    ...
 ValueError: size must be >= 0
 
 __________________________________________________________________________________
 Invalid square size format
 >>> print_square(1.0)
 Traceback (most recent call last):
-    File "<stdin>", line 1, in ?
+    ...
 TypeError: size must be an integer
+
+__________________________________________________________________________________
+Too many argument
+>>> print_square(2, 3)
+Traceback (most recent call last):
+    ...
+TypeError: print_square() takes 1 positional argument but 2 were given

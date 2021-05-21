@@ -36,19 +36,26 @@ ________________________________________________________________________________
 Invalid single first name format
 >>> say_my_name(2)
 Traceback (most recent call last):
-    File "<stdin>", line 1, in ?
+    ...
 TypeError: first_name must be a string
 
 __________________________________________________________________________________
 Invalid first name format
 >>> say_my_name(4, "White")
 Traceback (most recent call last):
-    File "<stdin>", line 1, in ?
+    ...
 TypeError: first_name must be a string
 
 __________________________________________________________________________________
 Invalid last name format
 >>> say_my_name("Bob", 4)
 Traceback (most recent call last):
-    File "<stdin>", line 1, in ?
+    ...
 TypeError: last_name must be a string
+
+__________________________________________________________________________________
+Too many argument
+>>> say_my_name("John", "Snow", "White")
+Traceback (most recent call last):
+    ...
+TypeError: say_my_name() takes from 1 to 2 positional arguments but 3 were given

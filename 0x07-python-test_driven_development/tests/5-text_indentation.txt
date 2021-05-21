@@ -77,3 +77,10 @@ Space after
 testststs?
 <BLANKLINE>
 teststestest
+
+__________________________________________________________________________________
+Too many argument
+>>> text_indentation("lorem ipsum", 3)
+Traceback (most recent call last):
+    ...
+TypeError: text_indentation() takes 1 positional argument but 2 were given

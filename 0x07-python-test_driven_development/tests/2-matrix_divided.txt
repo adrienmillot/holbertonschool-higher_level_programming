@@ -70,3 +70,10 @@ ________________________________________________________________________________
 Return type
 >>> type(matrix_divided([[1,2,3],[4,5,6]], 2))
 <class 'list'>
+
+__________________________________________________________________________________
+Too many argument
+>>> matrix_divided(matrix, 3, 2)
+Traceback (most recent call last):
+    ...
+TypeError: matrix_divided() takes 2 positional arguments but 3 were given
