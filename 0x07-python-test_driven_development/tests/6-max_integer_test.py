@@ -6,7 +6,12 @@ max_integer = __import__('6-max_integer').max_integer
 
 class max_integer_test(unittest.TestCase):
     def test_nullable_parameter(self):
-        self.assertIsNone(max_integer(()))
+        """ test_nullable_parameter function
+
+        this function test all posibilities with empty list
+        """
+        self.assertIsNone(max_integer())
+        self.assertIsNone(max_integer([]))
 
     def test_integer_format(self):
         """ test_integer_format function
