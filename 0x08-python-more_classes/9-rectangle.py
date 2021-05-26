@@ -11,8 +11,8 @@ class Rectangle:
 
     def __init__(self, prmWidth=0, prmHeight=0):
         """ Constructor of the class """
-        self.height = prmHeight
         self.width = prmWidth
+        self.height = prmHeight
         Rectangle.number_of_instances += 1
 
     @property
