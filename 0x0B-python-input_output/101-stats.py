@@ -5,44 +5,50 @@
 import sys
 
 
-if __name__ == "__main__":
-    file_size = [0]
-    status_count = {
-        200: 0, 301: 0, 400: 0, 401: 0,
-        403: 0, 404: 0, 405: 0, 500: 0
-    }
+file_size = 0
+status_count = {
+    200: 0, 301: 0, 400: 0, 401: 0,
+    403: 0, 404: 0, 405: 0, 500: 0
+}
 
-    def increment(prmString):
-        """ increment request number """
-        try:
-            data = prmString.split()
-            errorCode = int(data[-2])
-            file_size[0] += int(data[-1])
-            if check(errorCode) is True:
-                status_count[errorCode] += 1
 
-        except:
-            pass
-
-    def check(prmErrorCode):
-        """ check error code validity """
-        if prmErrorCode in status_count:
-            return True
-        return False
-
-    def print_stats():
-        """ print statistics """
-        print("File size: {:d}".format(file_size[0]))
-        for errorCode, count in sorted(status_count.items()):
-            if status_count[errorCode]:
-                print("{:d}: {:d}".format(errorCode, count))
-
+def incrementErrorStatusCount(prmString):
+    """ increment request number """
+    global file_size, status_count
     try:
-        for index, line in enumerate(sys.stdin):
-            increment(line)
-            if index % 10 == 0:
-                print_stats()
-    except KeyboardInterrupt:
-        print_stats()
-        raise
-    print_stats()
+        data = prmString.split()
+        errorCode = int(data[-2])
+        file_size += int(data[-1])
+        if checkValidity(errorCode) is True:
+            status_count[errorCode] += 1
+
+    except:
+        pass
+
+
+def checkValidity(prmErrorCode):
+    """ check error code validity """
+    global status_count
+    if prmErrorCode in status_count:
+        return True
+    return False
+
+
+def printStatistics():
+    """ print statistics """
+    global file_size, status_count
+    print("File size: {:d}".format(file_size))
+    for errorCode, count in sorted(status_count.items()):
+        if status_count[errorCode]:
+            print("{:d}: {:d}".format(errorCode, count))
+
+
+try:
+    for index, line in enumerate(sys.stdin):
+        incrementErrorStatusCount(line)
+        if (index + 1) % 10 == 0:
+            printStatistics()
+except KeyboardInterrupt:
+    pass
+finally:
+    printStatistics()
