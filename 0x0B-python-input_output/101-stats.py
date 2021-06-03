@@ -3,6 +3,7 @@
 
 
 import sys
+import re
 
 
 file_size = 0
@@ -16,10 +17,12 @@ def incrementErrorStatusCount(prmString):
     """ increment request number """
     global file_size, status_count
     try:
-        data = prmString.split()
-        errorCode = int(data[-2])
-        file_size += int(data[-1])
-        if checkValidity(errorCode) is True:
+        data = re.split("(.*) (.*) ([0-9]*)$", prmString)
+        if len(data) == 5:
+            if data[-3].isnumeric():
+                errorCode = int(data[-3])
+            file_size += (int(data[-2]))
+        if len(data) == 5 and checkValidity(errorCode) is True:
             status_count[errorCode] += 1
 
     except:
