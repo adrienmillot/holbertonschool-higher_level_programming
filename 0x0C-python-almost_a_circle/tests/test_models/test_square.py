@@ -314,3 +314,23 @@ class SquareTest(unittest.TestCase):
             s1.update(id=89, size=2, x=4, y=-5)
         except ValueError as exception:
             self.assertEqual(exception.args[0], "y must be >= 0")
+
+    def testToDictionary(self):
+        """
+            Function test that to_dictionary function
+        """
+        Base._Base__nb_objects = 0
+
+        s1 = Square(10, 2, 1, 9)
+        s1_dictionary = s1.to_dictionary()
+        self.assertEqual(
+            s1.__str__(), "[Square] ({:d}) {:d}/{:d} - {:d}".format(9, 2, 1, 10))
+        self.assertEqual(
+            s1_dictionary, {'x': s1.x, 'y': s1.y, 'id': s1.id, 'size': s1.size})
+
+        s2 = Square(1, 1)
+        self.assertEqual(
+            s2.__str__(), "[Square] ({:d}) {:d}/{:d} - {:d}".format(1, 1, 0, 1))
+        s2.update(**s1_dictionary)
+        self.assertEqual(
+            s2.__str__(), "[Square] ({:d}) {:d}/{:d} - {:d}".format(9, 2, 1, 10))
