@@ -117,3 +117,15 @@ class Rectangle(Base):
                 self.x = prmArgs[3]
             if len(prmArgs) > 4:
                 self.y = prmArgs[4]
+        else:
+            if "id" in prmKArgs:
+                self.strict_integer_validation("id", prmKArgs["id"])
+                self.id = prmKArgs["id"]
+            if "width" in prmKArgs:
+                self.width = prmKArgs["width"]
+            if "height" in prmKArgs:
+                self.height = prmKArgs["height"]
+            if "x" in prmKArgs:
+                self.x = prmKArgs["x"]
+            if "y" in prmKArgs:
+                self.y = prmKArgs["y"]
