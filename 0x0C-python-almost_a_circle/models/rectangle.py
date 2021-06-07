@@ -33,6 +33,7 @@ class Rectangle(Base):
     @height.setter
     def height(self, prmValue):
         """ height setter """
+        Base.strict_integer_validation("height", prmValue)
         self.__height = prmValue
 
     @property
@@ -43,6 +44,7 @@ class Rectangle(Base):
     @width.setter
     def width(self, prmValue):
         """ width setter """
+        Base.strict_integer_validation("width", prmValue)
         self.__width = prmValue
 
     @property
@@ -53,6 +55,7 @@ class Rectangle(Base):
     @x.setter
     def x(self, prmValue):
         """ x setter """
+        Base.integer_validation("x", prmValue)
         self.__x = prmValue
 
     @property
@@ -63,4 +66,5 @@ class Rectangle(Base):
     @y.setter
     def y(self, prmValue):
         """ y setter """
+        Base.integer_validation("y", prmValue)
         self.__y = prmValue

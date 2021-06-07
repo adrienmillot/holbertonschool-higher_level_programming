@@ -33,9 +33,6 @@ class RectangleTest(unittest.TestCase):
         r3 = Rectangle(10, 2, 9, 3)
         r4 = Rectangle(10, 2, 3, 9)
         r5 = Rectangle(10, 2, 0, 0, 12)
-        r6 = Rectangle("Holberton", "Orange")
-        r7 = Rectangle(-4, -3, -2, -1, 0)
-        r8 = Rectangle(3.7, 4.3, 5.6, 2.9, 7.8)
 
         self.assertEqual(r1.id, 1)
         self.assertEqual(r1.width, 10)
@@ -62,18 +59,100 @@ class RectangleTest(unittest.TestCase):
         self.assertEqual(r5.height, 2)
         self.assertEqual(r5.x, 0)
         self.assertEqual(r5.y, 0)
-        self.assertEqual(r6.id, 5)
-        self.assertEqual(r6.width, "Holberton")
-        self.assertEqual(r6.height, "Orange")
-        self.assertEqual(r6.x, 0)
-        self.assertEqual(r6.y, 0)
-        self.assertEqual(r7.id, 0)
-        self.assertEqual(r7.width, -4)
-        self.assertEqual(r7.height, -3)
-        self.assertEqual(r7.x, -2)
-        self.assertEqual(r7.y, -1)
-        self.assertEqual(r8.id, 7.8)
-        self.assertEqual(r8.width, 3.7)
-        self.assertEqual(r8.height, 4.3)
-        self.assertEqual(r8.x, 5.6)
-        self.assertEqual(r8.y, 2.9)
+
+    def testIntegerValidationTypeError(self):
+        """
+            Function test type integer validation
+        """
+        with self.assertRaises(TypeError):
+            r = Rectangle("Holberton", 2)
+
+        with self.assertRaises(TypeError):
+            r = Rectangle(2, "Orange")
+
+        with self.assertRaises(TypeError):
+            r = Rectangle(3.7, 4.3, 5.6, 2.9, 7.8)
+
+        with self.assertRaises(TypeError):
+            r = Rectangle(3.7, 4, 5, 2, 7)
+
+        with self.assertRaises(TypeError):
+            r = Rectangle(3, 4.3, 5, 2, 7)
+
+        with self.assertRaises(TypeError):
+            r = Rectangle(3, 4, 5.6, 2, 7)
+
+        with self.assertRaises(TypeError):
+            r = Rectangle(3, 4, 5, 2.9, 7)
+
+        try:
+            r = Rectangle("Holberton", 2)
+        except TypeError as exception:
+            self.assertEqual(exception.args[0], "width must be an integer")
+
+        try:
+            r = Rectangle(2, "Orange")
+        except TypeError as exception:
+            self.assertEqual(exception.args[0], "height must be an integer")
+
+        try:
+            r = Rectangle(3.7, 4.3, 5.6, 2.9, 7.8)
+        except TypeError as exception:
+            self.assertEqual(exception.args[0], "width must be an integer")
+
+        try:
+            r = Rectangle(3.7, 4, 5, 2, 7)
+        except TypeError as exception:
+            self.assertEqual(exception.args[0], "width must be an integer")
+
+        try:
+            r = Rectangle(3, 4.3, 5, 2, 7)
+        except TypeError as exception:
+            self.assertEqual(exception.args[0], "height must be an integer")
+
+        try:
+            r = Rectangle(3, 4, 5.6, 2, 7)
+        except TypeError as exception:
+            self.assertEqual(exception.args[0], "x must be an integer")
+
+        try:
+            r = Rectangle(3, 4, 5, 2.9, 7)
+        except TypeError as exception:
+            self.assertEqual(exception.args[0], "y must be an integer")
+
+    def testIntegerValidationValueError(self):
+        """
+            Function test value integer validation
+        """
+        with self.assertRaises(ValueError):
+            r = Rectangle(-4, -3, -2, -1, 0)
+
+        try:
+            r = Rectangle(0, 4)
+        except ValueError as exception:
+            self.assertEqual(exception.args[0], "width must be > 0")
+
+        try:
+            r = Rectangle(-1, 4)
+        except ValueError as exception:
+            self.assertEqual(exception.args[0], "width must be > 0")
+
+        try:
+            r = Rectangle(1, 0)
+        except ValueError as exception:
+            self.assertEqual(exception.args[0], "height must be > 0")
+
+        try:
+            r = Rectangle(1, -4)
+        except ValueError as exception:
+            self.assertEqual(exception.args[0], "height must be > 0")
+
+        try:
+            r = Rectangle(1, 4, -7)
+        except ValueError as exception:
+            self.assertEqual(exception.args[0], "x must be >= 0")
+
+        try:
+            r = Rectangle(1, 4, 7, -5)
+        except ValueError as exception:
+            self.assertEqual(exception.args[0], "y must be >= 0")
