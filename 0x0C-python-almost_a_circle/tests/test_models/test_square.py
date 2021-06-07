@@ -145,3 +145,172 @@ class SquareTest(unittest.TestCase):
 
         s3 = Square(8, 7, 0, 12)
         self.assertEqual(s3.__str__(), "[Square] ({:d}) {:d}/{:d} - {:d}".format(12, 7, 0, 8))
+
+    def testUpdate(self):
+        s1 = Square(10, 10, 10, 10)
+        self.assertEqual(
+            s1.__str__(), "[Square] ({:d}) {:d}/{:d} - {:d}".format(10, 10, 10, 10))
+
+        s1.update(89)
+        self.assertEqual(
+            s1.__str__(), "[Square] ({:d}) {:d}/{:d} - {:d}".format(89, 10, 10, 10))
+
+        s1.update(89, 2)
+        self.assertEqual(
+            s1.__str__(), "[Square] ({:d}) {:d}/{:d} - {:d}".format(89, 10, 10, 2))
+
+        s1.update(89, 2, 3)
+        self.assertEqual(
+            s1.__str__(), "[Square] ({:d}) {:d}/{:d} - {:d}".format(89, 3, 10, 2))
+
+        s1.update(89, 2, 3, 4)
+        self.assertEqual(
+            s1.__str__(), "[Square] ({:d}) {:d}/{:d} - {:d}".format(89, 3, 4, 2))
+
+        s1.update(89, 2, 3, 4, 5)
+        self.assertEqual(
+            s1.__str__(), "[Square] ({:d}) {:d}/{:d} - {:d}".format(89, 3, 4, 2))
+
+        with self.assertRaises(TypeError):
+            s1.update("a")
+
+        try:
+            s1.update("a")
+        except TypeError as exception:
+            self.assertEqual(exception.args[0], "id must be an integer")
+
+        with self.assertRaises(ValueError):
+            s1.update(-1)
+
+        try:
+            s1.update(-1)
+        except ValueError as exception:
+            self.assertEqual(exception.args[0], "id must be > 0")
+
+        with self.assertRaises(TypeError):
+            s1.update(89, "a")
+
+        try:
+            s1.update(89, "a")
+        except TypeError as exception:
+            self.assertEqual(exception.args[0], "width must be an integer")
+
+        with self.assertRaises(ValueError):
+            s1.update(89, -2)
+
+        try:
+            s1.update(89, -2)
+        except ValueError as exception:
+            self.assertEqual(exception.args[0], "width must be > 0")
+
+        with self.assertRaises(TypeError):
+            s1.update(89, 2, "a")
+
+        try:
+            s1.update(89, 2, "a")
+        except TypeError as exception:
+            self.assertEqual(exception.args[0], "x must be an integer")
+
+        with self.assertRaises(ValueError):
+            s1.update(89, 2, -3)
+
+        try:
+            s1.update(89, 2, -3)
+        except ValueError as exception:
+            self.assertEqual(exception.args[0], "x must be >= 0")
+
+        with self.assertRaises(TypeError):
+            s1.update(89, 2, 3, "a")
+
+        try:
+            s1.update(89, 2, 3, "a")
+        except TypeError as exception:
+            self.assertEqual(exception.args[0], "y must be an integer")
+
+        with self.assertRaises(ValueError):
+            s1.update(89, 2, 3, -4)
+
+        try:
+            s1.update(89, 2, 3, -4)
+        except ValueError as exception:
+            self.assertEqual(exception.args[0], "y must be >= 0")
+
+        s1.update(height=1)
+        self.assertEqual(
+            s1.__str__(), "[Square] ({:d}) {:d}/{:d} - {:d}".format(89, 3, 4, 2))
+
+        s1.update(width=1, x=2)
+        self.assertEqual(
+            s1.__str__(), "[Square] ({:d}) {:d}/{:d} - {:d}".format(89, 2, 4, 2))
+
+        s1.update(y=1, width=2, x=3, id=90)
+        self.assertEqual(
+            s1.__str__(), "[Square] ({:d}) {:d}/{:d} - {:d}".format(90, 3, 1, 2))
+
+        s1.update(x=1, height=2, y=3, width=4)
+        self.assertEqual(
+            s1.__str__(), "[Square] ({:d}) {:d}/{:d} - {:d}".format(90, 1, 3, 2))
+
+        with self.assertRaises(TypeError):
+            s1.update(id="a")
+
+        try:
+            s1.update(id="a")
+        except TypeError as exception:
+            self.assertEqual(exception.args[0], "id must be an integer")
+
+        with self.assertRaises(ValueError):
+            s1.update(id=-1)
+
+        try:
+            s1.update(id=-1)
+        except ValueError as exception:
+            self.assertEqual(exception.args[0], "id must be > 0")
+
+        with self.assertRaises(TypeError):
+            s1.update(id=89, size="a")
+
+        try:
+            s1.update(id=89, size="a")
+        except TypeError as exception:
+            self.assertEqual(exception.args[0], "width must be an integer")
+
+        with self.assertRaises(ValueError):
+            s1.update(id=89, size=-2)
+
+        try:
+            s1.update(id=89, size=-2)
+        except ValueError as exception:
+            self.assertEqual(exception.args[0], "width must be > 0")
+
+        with self.assertRaises(TypeError):
+            s1.update(id=89, size=2, x="a")
+
+        try:
+            s1.update(id=89, size=2, x="a")
+        except TypeError as exception:
+            self.assertEqual(exception.args[0], "x must be an integer")
+
+        with self.assertRaises(ValueError):
+            s1.update(id=89, size=2, x=-4)
+
+        try:
+            s1.update(id=89, size=2, x=-4)
+        except ValueError as exception:
+            self.assertEqual(exception.args[0], "x must be >= 0")
+
+        with self.assertRaises(TypeError):
+            s1.update(id=89, size=2, x=4, y="a")
+
+        try:
+            s1.update(id=89, size=2, x=4, y="a")
+        except TypeError as exception:
+            self.assertEqual(exception.args[0], "y must be an integer")
+
+        with self.assertRaises(ValueError):
+            s1.update(id=89, size=2, height=3, x=4, y=-5)
+
+        try:
+            s1.update(id=89, size=2, x=4, y=-5)
+        except ValueError as exception:
+            self.assertEqual(exception.args[0], "y must be >= 0")

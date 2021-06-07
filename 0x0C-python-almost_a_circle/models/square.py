@@ -48,3 +48,34 @@ class Square(Rectangle):
         """ size setter """
         self.width = prmValue
         self.height = prmValue
+
+    def update(self, *prmArgs, **prmKArgs):
+        """
+            Function that assigns an argument to each attribute
+
+            Args:
+                prmArgs: argument's array
+                prmKArgs: argument's dictionary
+        """
+        if len(prmArgs) > 0:
+            if len(prmArgs) > 0:
+                self.strict_integer_validation("id", prmArgs[0])
+                self.id = prmArgs[0]
+            if len(prmArgs) > 1:
+                self.width = prmArgs[1]
+                self.height = prmArgs[1]
+            if len(prmArgs) > 2:
+                self.x = prmArgs[2]
+            if len(prmArgs) > 3:
+                self.y = prmArgs[3]
+        else:
+            if "id" in prmKArgs:
+                self.strict_integer_validation("id", prmKArgs["id"])
+                self.id = prmKArgs["id"]
+            if "size" in prmKArgs:
+                self.width = prmKArgs["size"]
+                self.height = prmKArgs["size"]
+            if "x" in prmKArgs:
+                self.x = prmKArgs["x"]
+            if "y" in prmKArgs:
+                self.y = prmKArgs["y"]
