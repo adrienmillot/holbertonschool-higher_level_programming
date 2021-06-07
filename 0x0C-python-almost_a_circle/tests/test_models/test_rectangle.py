@@ -4,6 +4,7 @@
 
 from models.base import Base
 from models.rectangle import Rectangle
+from tests.test_models.tools import Tools
 import unittest
 
 
@@ -160,3 +161,18 @@ class RectangleTest(unittest.TestCase):
 
         r3 = Rectangle(8, 7, 0, 0, 12)
         self.assertEqual(r3.area(), 56, "area() doesn't return good value")
+
+        r = Rectangle(999999999999999, 999999999999999999, 0, 0, 1)
+        self.assertEqual(999999999999998999000000000000001, r.area())
+
+    def testDisplay(self):
+        """
+            Function that test display function
+        """
+        r = Rectangle(2, 3, 0, 0, 0)
+        capture = Tools.capture_stdout(r, "display")
+        self.assertEqual("##\n##\n##\n", capture.getvalue())
+
+        r = Rectangle(5, 1, 2, 4, 7)
+        with self.assertRaises(TypeError):
+            r.display(1)
