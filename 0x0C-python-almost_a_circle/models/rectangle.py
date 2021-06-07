@@ -80,8 +80,10 @@ class Rectangle(Base):
             Function that print in stdout the instance with the character
             # by taking care of x and y
         """
+        for row in range(self.y):
+            print()
         for row in range(self.height):
-            print("#" * self.width)
+            print(" " * self.x + "#" * self.width)
 
     def __str__(self):
         """

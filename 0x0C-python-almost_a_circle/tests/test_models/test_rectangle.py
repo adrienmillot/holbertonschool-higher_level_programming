@@ -173,6 +173,20 @@ class RectangleTest(unittest.TestCase):
         capture = Tools.capture_stdout(r, "display")
         self.assertEqual("##\n##\n##\n", capture.getvalue())
 
+        r = Rectangle(3, 2, 1, 0, 1)
+        capture = Tools.capture_stdout(r, "display")
+        self.assertEqual(" ###\n ###\n", capture.getvalue())
+
+        r = Rectangle(4, 5, 0, 1, 0)
+        capture = Tools.capture_stdout(r, "display")
+        display = "\n####\n####\n####\n####\n####\n"
+        self.assertEqual(display, capture.getvalue())
+
+        r = Rectangle(2, 4, 3, 2, 0)
+        capture = Tools.capture_stdout(r, "display")
+        display = "\n\n   ##\n   ##\n   ##\n   ##\n"
+        self.assertEqual(display, capture.getvalue())
+
         r = Rectangle(5, 1, 2, 4, 7)
         with self.assertRaises(TypeError):
             r.display(1)
