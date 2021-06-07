@@ -128,19 +128,9 @@ class RectangleTest(unittest.TestCase):
             r = Rectangle(-4, -3, -2, -1, 0)
 
         try:
-            r = Rectangle(0, 4)
-        except ValueError as exception:
-            self.assertEqual(exception.args[0], "width must be > 0")
-
-        try:
             r = Rectangle(-1, 4)
         except ValueError as exception:
             self.assertEqual(exception.args[0], "width must be > 0")
-
-        try:
-            r = Rectangle(1, 0)
-        except ValueError as exception:
-            self.assertEqual(exception.args[0], "height must be > 0")
 
         try:
             r = Rectangle(1, -4)
@@ -156,3 +146,17 @@ class RectangleTest(unittest.TestCase):
             r = Rectangle(1, 4, 7, -5)
         except ValueError as exception:
             self.assertEqual(exception.args[0], "y must be >= 0")
+
+    def testArea(self):
+        """
+            Function that test area function
+        """
+
+        r1 = Rectangle(3, 2)
+        self.assertEqual(r1.area(), 6, "area() doesn't return good value")
+
+        r2 = Rectangle(2, 10)
+        self.assertEqual(r2.area(), 20, "area() doesn't return good value")
+
+        r3 = Rectangle(8, 7, 0, 0, 12)
+        self.assertEqual(r3.area(), 56, "area() doesn't return good value")
