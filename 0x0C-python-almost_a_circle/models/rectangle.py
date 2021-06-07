@@ -129,3 +129,15 @@ class Rectangle(Base):
                 self.x = prmKArgs["x"]
             if "y" in prmKArgs:
                 self.y = prmKArgs["y"]
+
+    def to_dictionary(self):
+        """
+            Function that returns the dictionary representation of the instance
+        """
+        return {
+            "x": self.x,
+            "y": self.y,
+            "id": self.id,
+            "height": self.height,
+            "width": self.width
+        }
