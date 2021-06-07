@@ -176,3 +176,18 @@ class RectangleTest(unittest.TestCase):
         r = Rectangle(5, 1, 2, 4, 7)
         with self.assertRaises(TypeError):
             r.display(1)
+
+    def testStr(self):
+        """
+            Function that test __str__ function
+        """
+        Base._Base__nb_objects = 0
+
+        r1 = Rectangle(3, 2)
+        self.assertEqual(r1.__str__(), "[Rectangle] ({:d}) {:d}/{:d} - {:d}/{:d}".format(1, 0, 0, 3, 2), "wrong return")
+
+        r2 = Rectangle(2, 10)
+        self.assertEqual(r2.__str__(), "[Rectangle] ({:d}) {:d}/{:d} - {:d}/{:d}".format(2, 0, 0, 2, 10), "wrong return")
+
+        r3 = Rectangle(8, 7, 0, 0, 12)
+        self.assertEqual(r3.__str__(), "[Rectangle] ({:d}) {:d}/{:d} - {:d}/{:d}".format(12, 0, 0, 8, 7), "wrong return")
