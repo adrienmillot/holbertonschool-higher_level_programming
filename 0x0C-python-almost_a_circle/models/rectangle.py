@@ -96,3 +96,24 @@ class Rectangle(Base):
             self.width,
             self.height
         )
+
+    def update(self, *prmArgs, **prmKArgs):
+        """
+            Function that assigns an argument to each attribute
+
+            Args:
+                prmArgs: argument's array
+                prmKArgs: argument's dictionary
+        """
+        if len(prmArgs) > 0:
+            if len(prmArgs) > 0:
+                self.strict_integer_validation("id", prmArgs[0])
+                self.id = prmArgs[0]
+            if len(prmArgs) > 1:
+                self.width = prmArgs[1]
+            if len(prmArgs) > 2:
+                self.height = prmArgs[2]
+            if len(prmArgs) > 3:
+                self.x = prmArgs[3]
+            if len(prmArgs) > 4:
+                self.y = prmArgs[4]

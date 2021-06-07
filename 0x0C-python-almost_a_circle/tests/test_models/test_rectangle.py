@@ -205,3 +205,119 @@ class RectangleTest(unittest.TestCase):
 
         r3 = Rectangle(8, 7, 0, 0, 12)
         self.assertEqual(r3.__str__(), "[Rectangle] ({:d}) {:d}/{:d} - {:d}/{:d}".format(12, 0, 0, 8, 7), "wrong return")
+
+    def testUpdate(self):
+        """
+            Function that test update function
+        """
+        Base._Base__nb_objects = 0
+
+        r1 = Rectangle(10, 10, 10, 10)
+        self.assertEqual(r1.__str__(), "[Rectangle] ({:d}) {:d}/{:d} - {:d}/{:d}".format(1, 10, 10, 10, 10), "wrong string return")
+
+        r1.update(89)
+        self.assertEqual(r1.__str__(), "[Rectangle] ({:d}) {:d}/{:d} - {:d}/{:d}".format(89, 10, 10, 10, 10), "wrong string return")
+
+        r1.update(89, 2)
+        self.assertEqual(r1.__str__(), "[Rectangle] ({:d}) {:d}/{:d} - {:d}/{:d}".format(89, 10, 10, 2, 10), "wrong string return")
+
+        r1.update(89, 2, 3)
+        self.assertEqual(r1.__str__(), "[Rectangle] ({:d}) {:d}/{:d} - {:d}/{:d}".format(89, 10, 10, 2, 3), "wrong string return")
+
+        r1.update(89, 2, 3, 4)
+        self.assertEqual(r1.__str__(), "[Rectangle] ({:d}) {:d}/{:d} - {:d}/{:d}".format(89, 4, 10, 2, 3), "wrong string return")
+
+        r1.update(89, 2, 3, 4, 5)
+        self.assertEqual(r1.__str__(), "[Rectangle] ({:d}) {:d}/{:d} - {:d}/{:d}".format(89, 4, 5, 2, 3), "wrong string return")
+
+        with self.assertRaises(TypeError):
+            r1.update("a")
+
+        try:
+            r1.update("a")
+        except TypeError as exception:
+            self.assertEqual(exception.args[0], "id must be an integer", "wrong message")
+
+        with self.assertRaises(ValueError):
+            r1.update(-1)
+
+        try:
+            r1.update(-1)
+        except ValueError as exception:
+            self.assertEqual(exception.args[0], "id must be > 0", "wrong message")
+
+        with self.assertRaises(TypeError):
+            r1.update(89, "a")
+
+        with self.assertRaises(TypeError):
+            r1.update(89, 1.0)
+
+        try:
+            r1.update(89, "a")
+        except TypeError as exception:
+            self.assertEqual(exception.args[0], "width must be an integer", "wrong message")
+
+        with self.assertRaises(ValueError):
+            r1.update(89, -2)
+
+        try:
+            r1.update(89, -2)
+        except ValueError as exception:
+            self.assertEqual(exception.args[0], "width must be > 0", "wrong message")
+
+        with self.assertRaises(TypeError):
+            r1.update(89, 2, "a")
+
+        with self.assertRaises(TypeError):
+            r1.update(89, 2, 1.0)
+
+        try:
+            r1.update(89, 2, "a")
+        except TypeError as exception:
+            self.assertEqual(exception.args[0], "height must be an integer", "wrong message")
+
+        with self.assertRaises(ValueError):
+            r1.update(89, 2, -3)
+
+        try:
+            r1.update(89, 2, -3)
+        except ValueError as exception:
+            self.assertEqual(exception.args[0], "height must be > 0", "wrong message")
+
+        with self.assertRaises(TypeError):
+            r1.update(89, 2, 3, "a", "x shouldn't be a string")
+
+        with self.assertRaises(TypeError):
+            r1.update(89, 2, 3, 1.0, "x shouldn't be a float")
+
+        try:
+            r1.update(89, 2, 3, "a")
+        except TypeError as exception:
+            self.assertEqual(exception.args[0], "x must be an integer", "wrong message")
+
+        with self.assertRaises(ValueError):
+            r1.update(89, 2, 3, -4)
+
+        try:
+            r1.update(89, 2, 3, -4)
+        except ValueError as exception:
+            self.assertEqual(exception.args[0], "x must be >= 0", "wrong message")
+
+        with self.assertRaises(TypeError):
+            r1.update(89, 2, 3, 4, "a", "y shouldn't be a string")
+
+        with self.assertRaises(TypeError):
+            r1.update(89, 2, 3, 4, 1.0, "y shouldn't be a float")
+
+        try:
+            r1.update(89, 2, 3, 4, "a")
+        except TypeError as exception:
+            self.assertEqual(exception.args[0], "y must be an integer", "wrong message")
+
+        with self.assertRaises(ValueError):
+            r1.update(89, 2, 3, 4, -5)
+
+        try:
+            r1.update(89, 2, 3, 4, -5)
+        except ValueError as exception:
+            self.assertEqual(exception.args[0], "y must be >= 0", "wrong message")
