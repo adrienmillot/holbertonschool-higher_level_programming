@@ -2,6 +2,9 @@
 """ Base module """
 
 
+import json
+
+
 class Base:
     """ Base class """
     __nb_objects = 0
@@ -47,3 +50,14 @@ class Base:
             raise TypeError("{} must be an integer".format(prmName))
         if prmValue < 0:
             raise ValueError("{} must be >= 0".format(prmName))
+
+    @staticmethod
+    def to_json_string(list_dictionaries):
+        """
+            Function that return  the JSON string representation
+            of a dictionary
+        """
+        if None is list_dictionaries or len(list_dictionaries) == 0:
+            return "[]"
+
+        return json.dumps(list_dictionaries)
