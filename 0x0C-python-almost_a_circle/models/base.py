@@ -174,3 +174,15 @@ class Base:
                     list.append(instance)
             return list
         return list
+
+    def draw(list_rectangles, list_squares):
+        import turtle
+
+        for elem in list_squares:
+            turtle.forward(elem.width)
+            turtle.right(90)
+            turtle.forward(elem.height)
+            turtle.right(90)
+            turtle.forward(elem.width)
+            turtle.right(90)
+            turtle.forward(elem.height)
