@@ -491,3 +491,25 @@ class RectangleTest(unittest.TestCase):
         list_output = Rectangle.from_json_string(json_list_input)
         self.assertIsInstance(list_output, list)
         self.assertListEqual(list_output, list_input)
+
+    def testCreate(self):
+        r1 = Rectangle(3, 5)
+        r1_dictionary = r1.to_dictionary()
+        r2 = Rectangle.create(**r1_dictionary)
+        self.assertIsNot(r1, r2, "Objects shouldn't be equal")
+        self.assertNotEqual(r1, r2, "Values'object should be equal")
+        self.assertNotEqual(r1_dictionary, r2.to_dictionary, "Values are not equal")
+
+        r1 = Rectangle(3, 5, 1)
+        r1_dictionary = r1.to_dictionary()
+        r2 = Rectangle.create(**r1_dictionary)
+        self.assertIsNot(r1, r2, "Objects shouldn't be equal")
+        self.assertNotEqual(r1, r2, "Values'object should be equal")
+        self.assertNotEqual(r1_dictionary, r2.to_dictionary, "Values are not equal")
+
+        r1 = Rectangle(3, 5, 1, 4)
+        r1_dictionary = r1.to_dictionary()
+        r2 = Rectangle.create(**r1_dictionary)
+        self.assertIsNot(r1, r2, "Objects shouldn't be equal")
+        self.assertNotEqual(r1, r2, "Values'object should be equal")
+        self.assertNotEqual(r1_dictionary, r2.to_dictionary, "Values are not equal")

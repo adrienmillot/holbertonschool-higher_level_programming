@@ -379,3 +379,32 @@ class SquareTest(unittest.TestCase):
         list_output = Square.from_json_string(json_list_input)
         self.assertIsInstance(list_output, list)
         self.assertListEqual(list_output, list_input)
+
+    def testCreate(self):
+        s1 = Square(3)
+        s1_dictionary = s1.to_dictionary()
+        s2 = Square.create(**s1_dictionary)
+        self.assertIsNot(s1, s2, "Object are not equal")
+        self.assertNotEqual(s1, s2, "Values are not equal")
+        self.assertNotEqual(s1_dictionary, s2.to_dictionary, "Values are not equal")
+
+        s1 = Square(3, 5)
+        s1_dictionary = s1.to_dictionary()
+        s2 = Square.create(**s1_dictionary)
+        self.assertIsNot(s1, s2, "Object are not equal")
+        self.assertNotEqual(s1, s2, "Values are not equal")
+        self.assertNotEqual(s1_dictionary, s2.to_dictionary, "Values are not equal")
+
+        s1 = Square(3, 5, 1)
+        s1_dictionary = s1.to_dictionary()
+        s2 = Square.create(**s1_dictionary)
+        self.assertIsNot(s1, s2, "Object are not equal")
+        self.assertNotEqual(s1, s2, "Values are not equal")
+        self.assertNotEqual(s1_dictionary, s2.to_dictionary, "Values are not equal")
+
+        s1 = Square(3, 5, 1, 3)
+        s1_dictionary = s1.to_dictionary()
+        s2 = Square.create(**s1_dictionary)
+        self.assertIsNot(s1, s2, "Object are not equal")
+        self.assertNotEqual(s1, s2, "Values are not equal")
+        self.assertNotEqual(s1_dictionary, s2.to_dictionary, "Values are not equal")
