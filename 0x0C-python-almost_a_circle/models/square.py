@@ -2,6 +2,7 @@
 """ Square module """
 
 
+from models.base import Base
 from models.rectangle import Rectangle
 
 
@@ -46,6 +47,7 @@ class Square(Rectangle):
     @size.setter
     def size(self, prmValue):
         """ size setter """
+        Base.strict_integer_validation("size", prmValue)
         self.width = prmValue
         self.height = prmValue
 

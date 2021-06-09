@@ -111,7 +111,29 @@ class SquareTest(unittest.TestCase):
             Function test value integer validation
         """
         with self.assertRaises(ValueError):
+            r = Square(0)
+
+        with self.assertRaises(ValueError):
+            r = Square(-4)
+
+        with self.assertRaises(ValueError):
+            r = Square(4, -3)
+
+        with self.assertRaises(ValueError):
+            r = Square(4, 3, -2)
+
+        with self.assertRaises(ValueError):
             r = Square(-4, -3, -2)
+
+        try:
+            r = Square(-1)
+        except ValueError as exception:
+            self.assertEqual(exception.args[0], "width must be > 0")
+
+        try:
+            r = Square(1, -4)
+        except ValueError as exception:
+            self.assertEqual(exception.args[0], "x must be >= 0")
 
         try:
             r = Square(-1, 4, 7)
