@@ -408,3 +408,18 @@ class SquareTest(unittest.TestCase):
         self.assertIsNot(s1, s2, "Object are not equal")
         self.assertNotEqual(s1, s2, "Values are not equal")
         self.assertNotEqual(s1_dictionary, s2.to_dictionary, "Values are not equal")
+
+    def test_load_from_file(self):
+        s1 = Square(1, 2, 3, 4)
+        s2 = Square(5, 6)
+        list_input = [s1, s2]
+
+        Square.save_to_file(list_input)
+
+        list_output = Square.load_from_file()
+
+        self.assertEqual(list_input[0].to_dictionary(), list_output[0].to_dictionary())
+        self.assertEqual(list_input[1].to_dictionary(), list_output[1].to_dictionary())
+
+        os.remove("Square.json")
+        self.assertEqual(Square.load_from_file(), [])

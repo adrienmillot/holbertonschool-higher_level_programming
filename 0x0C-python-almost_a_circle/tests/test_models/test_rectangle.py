@@ -513,3 +513,18 @@ class RectangleTest(unittest.TestCase):
         self.assertIsNot(r1, r2, "Objects shouldn't be equal")
         self.assertNotEqual(r1, r2, "Values'object should be equal")
         self.assertNotEqual(r1_dictionary, r2.to_dictionary, "Values are not equal")
+
+    def test_load_from_file(self):
+        r1 = Rectangle(1, 2, 3, 4)
+        r2 = Rectangle(5, 6)
+        list_input = [r1, r2]
+
+        Rectangle.save_to_file(list_input)
+
+        list_output = Rectangle.load_from_file()
+
+        self.assertEqual(list_input[0].to_dictionary(), list_output[0].to_dictionary())
+        self.assertEqual(list_input[1].to_dictionary(), list_output[1].to_dictionary())
+
+        os.remove("Rectangle.json")
+        self.assertEqual(Rectangle.load_from_file(), [])
