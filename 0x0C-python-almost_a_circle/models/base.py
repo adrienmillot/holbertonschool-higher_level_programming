@@ -61,3 +61,21 @@ class Base:
             return "[]"
 
         return json.dumps(list_dictionaries)
+
+    @classmethod
+    def save_to_file(cls, prmObjects):
+        """
+            Function that writes the JSON string representation
+            of object list in a file
+        """
+        fileName = "{}.json".format(cls.__name__)
+        list = []
+
+        if prmObjects is None or len(prmObjects) == 0:
+            prmObjects = []
+
+        with open(fileName, 'w', encoding="UTF-8") as file:
+            for elem in prmObjects:
+                list.append(elem.to_dictionary())
+            file.write(Base.to_json_string(list))
+        file.closed

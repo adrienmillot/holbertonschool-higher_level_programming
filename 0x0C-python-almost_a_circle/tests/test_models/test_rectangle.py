@@ -2,8 +2,10 @@
 """ RectangleTest module """
 
 
+import json
 from models.base import Base
 from models.rectangle import Rectangle
+import os
 from tests.test_models.tools import Tools
 import unittest
 
@@ -447,3 +449,32 @@ class RectangleTest(unittest.TestCase):
         self.assertEqual(r2.__str__(), "[Rectangle] ({:d}) {:d}/{:d} - {:d}/{:d}".format(1, 1, 9, 10, 2), "wrong return")
         self.assertDictEqual(r2_dictionary, {'x': r2.x, 'y': r2.y, 'id': r2.id, 'height': r2.height, 'width': r2.width}, "wrong return")
         self.assertEqual(r1_dictionary, r2_dictionary)
+
+    def testSaveToFile(self):
+        Base._Base__nb_objects = 0
+
+        list = None
+
+        Rectangle.save_to_file(None)
+
+        with open("Rectangle.json", "r") as file:
+            self.assertEqual(file.read(), '[]')
+        os.remove("Rectangle.json")
+
+        r1 = Rectangle(10, 7, 2, 8)
+        r2 = Rectangle(2, 4)
+        list = [r1, r2]
+        Rectangle.save_to_file(list)
+
+        with open("Rectangle.json", "r") as file:
+            reader = file.read()
+            to_dict = [r1.to_dictionary(), r2.to_dictionary()]
+            self.assertEqual(reader, json.dumps(to_dict))
+        os.remove("Rectangle.json")
+
+        list = []
+        Rectangle.save_to_file(list)
+
+        with open("Rectangle.json", "r") as file:
+            self.assertEqual(file.read(), '[]')
+        os.remove("Rectangle.json")

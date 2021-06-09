@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 
 
+import json
 from models.base import Base
 from models.square import Square
+import os
 import unittest
 
 
@@ -334,3 +336,33 @@ class SquareTest(unittest.TestCase):
         s2.update(**s1_dictionary)
         self.assertEqual(
             s2.__str__(), "[Square] ({:d}) {:d}/{:d} - {:d}".format(9, 2, 1, 10))
+
+    def testSaveToFile(self):
+        Base._Base__nb_objects = 0
+
+        list = None
+        Square.save_to_file(None)
+
+        with open("Square.json", "r") as file:
+            self.assertEqual(file.read(
+            ), '[]')
+        os.remove("Square.json")
+
+        s1 = Square(10, 7, 2, 8)
+        s2 = Square(2, 4)
+        list = [s1, s2]
+        Square.save_to_file(list)
+
+        with open("Square.json", "r") as file:
+            reader = file.read()
+            to_dict = [s1.to_dictionary(), s2.to_dictionary()]
+            self.assertEqual(reader, json.dumps(to_dict))
+        os.remove("Square.json")
+
+        list = []
+        Square.save_to_file(list)
+
+        with open("Square.json", "r") as file:
+            self.assertEqual(file.read(
+            ), '[]')
+        os.remove("Square.json")
