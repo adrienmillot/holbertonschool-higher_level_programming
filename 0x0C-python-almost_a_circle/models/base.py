@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ Base module """
 
-
+import csv
 import json
 import os
 
@@ -118,3 +118,59 @@ class Base:
                 return [cls.create(**dict) for dict in list_output]
 
         return []
+
+    @classmethod
+    def save_to_file_csv(cls, prmObjects):
+        """
+            Function that writes the JSON string representation
+            of object list in a file
+        """
+        from models.rectangle import Rectangle
+        from models.square import Square
+
+        fileName = "{}.csv".format(cls.__name__)
+
+        if prmObjects is None or len(prmObjects) == 0:
+            prmObjects = []
+
+        with open(fileName, 'w', encoding="UTF-8") as file:
+            writer = csv.writer(file)
+            for elem in prmObjects:
+                if Rectangle is cls:
+                    writer.writerow(
+                        (elem.id, elem.width, elem.height, elem.x, elem.y)
+                    )
+                if Square is cls:
+                    writer.writerow((elem.id, elem.size, elem.x, elem.y))
+        file.closed
+
+    @classmethod
+    def load_from_file_csv(cls):
+        from models.rectangle import Rectangle
+        from models.square import Square
+
+        fileName = "{}.csv".format(cls.__name__)
+        list = []
+        if os.path.isfile(fileName):
+            with open(fileName, "r") as file:
+                reader = csv.reader(file)
+                for row in reader:
+                    if Rectangle is cls:
+                        dictionary = {
+                            "id": int(row[0]),
+                            "width": int(row[1]),
+                            "height": int(row[2]),
+                            "x": int(row[3]),
+                            "y": int(row[4])
+                        }
+                    if Square is cls:
+                        dictionary = {
+                            "id": int(row[0]),
+                            "size": int(row[1]),
+                            "x": int(row[2]),
+                            "y": int(row[3])
+                        }
+                    instance = cls.create(**dictionary)
+                    list.append(instance)
+            return list
+        return list
