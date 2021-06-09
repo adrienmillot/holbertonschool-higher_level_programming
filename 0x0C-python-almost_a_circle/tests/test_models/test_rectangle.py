@@ -478,3 +478,16 @@ class RectangleTest(unittest.TestCase):
         with open("Rectangle.json", "r") as file:
             self.assertEqual(file.read(), '[]')
         os.remove("Rectangle.json")
+
+    def testFromJsonString(self):
+        """
+            Function that test json to list transformation
+        """
+        list_input = [
+            {'id': 89, 'width': 10, 'height': 4}, 
+            {'id': 7, 'width': 1, 'height': 7}
+        ]
+        json_list_input = Rectangle.to_json_string(list_input)
+        list_output = Rectangle.from_json_string(json_list_input)
+        self.assertIsInstance(list_output, list)
+        self.assertListEqual(list_output, list_input)

@@ -79,3 +79,12 @@ class Base:
                 list.append(elem.to_dictionary())
             file.write(Base.to_json_string(list))
         file.closed
+
+    def from_json_string(json_string):
+        """
+            Function that returns the list of the JSON string representation
+        """
+        if json_string is None or len(json_string) == 0:
+            return []
+
+        return json.loads(json_string)
