@@ -146,6 +146,9 @@ class Base:
 
     @classmethod
     def load_from_file_csv(cls):
+        """
+            Function that load list of instance from csv file
+        """
         from models.rectangle import Rectangle
         from models.square import Square
 
@@ -176,8 +179,13 @@ class Base:
         return list
 
     def draw(list_rectangles, list_squares):
+        """
+            Function that draw rectangle list
+        """
         import turtle
 
+        turtle.pencolor("white")
+        turtle.bgcolor("#2E3561")
         for elem in list_squares:
             turtle.forward(elem.width)
             turtle.right(90)
