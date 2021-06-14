@@ -186,6 +186,14 @@ class Base:
 
         turtle.pencolor("white")
         turtle.bgcolor("#2E3561")
+        for elem in list_rectangles:
+            turtle.forward(elem.width)
+            turtle.right(90)
+            turtle.forward(elem.height)
+            turtle.right(90)
+            turtle.forward(elem.width)
+            turtle.right(90)
+            turtle.forward(elem.height)
         for elem in list_squares:
             turtle.forward(elem.width)
             turtle.right(90)
