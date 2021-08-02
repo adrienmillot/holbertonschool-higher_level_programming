@@ -16,8 +16,4 @@ function add (a, b) {
  * prints the addition of 2 integers
  */
 
-if (isNaN(parseInt(process.argv[2])) || isNaN(parseInt(process.argv[3]))) {
-  console.log('Nan');
-} else {
-  console.log(add(parseInt(process.argv[2]), parseInt(process.argv[3])));
-}
+console.log(add(parseInt(process.argv[2]), parseInt(process.argv[3])));
