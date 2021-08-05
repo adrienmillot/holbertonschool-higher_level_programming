@@ -25,10 +25,8 @@ def main():
     )
     cur = conn.cursor()
     stName = sys.argv[4]
-    req = "SELECT * \
-        FROM states \
-            WHERE BINARY name='" + stName + "' \
-                ORDER BY id ASC"
+    req = "SELECT *  FROM states WHERE BINARY name='{}'\
+         ORDER BY id ASC".format(sys.argv[4])
     cur.execute(req)
     query_rows = cur.fetchall()
     for row in query_rows:
